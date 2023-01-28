@@ -20,6 +20,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
+	mongoose.set("strictQuery", true);
 	if (cached.conn) {
 		return cached.conn;
 	}
@@ -28,7 +29,6 @@ async function dbConnect() {
 		const opts = {
 			bufferCommands: false,
 		};
-
 		cached.promise = mongoose.connect(MONGO_URL, opts).then((mongoose) => {
 			return mongoose;
 		});
